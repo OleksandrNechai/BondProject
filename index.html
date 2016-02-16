@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="src/styles/app.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6">
+                <img src="src/img/simcorp_logo.jpg" class="img-responsive image-logo">
+            </div>
+            <div class="col-md-6">
+                <h1 class="text-right text-uppercase">Bond Project</h1>
+                <h3 class="text-right text-uppercase">Reference implementation</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="h3-heading">Bond Data</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    <label>Nominal:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-addon">$</span>
+                    </div>
+
+                    <label>Coupon Rate:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-addon">%</span>
+                    </div>
+
+                    <label>Coupon Frequency</label>
+                    <select class="form-control">
+                        <option value="1">Annual</option>
+                        <option value="2">Semi-Annual</option>
+                        <option value="4">Quarterly</option>
+                        <option value="12">Monthly</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Market Rate:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-addon">%</span>
+                    </div>
+
+                    <label>Coupon Amount:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-addon">$</span>
+                    </div>
+
+                    <label>Term:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-addon">Years</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    <label>Day Count Conv.</label>
+                    <select class="form-control">
+                        <option value="1">Annual</option>
+                        <option value="2">Semi-Annual</option>
+                        <option value="4">Quarterly</option>
+                        <option value="12">Monthly</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="project1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Favorite App Page</h4>
+                    </div>
+                    <div class="modal-body">
+                        <img class="img-responsive" src="http://lorempixel.com/555/300"> This was my first project in this class. I learned a lot about HTML and CSS.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
