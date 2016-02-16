@@ -1,5 +1,5 @@
-describe("Valid data is passed", function() {
-    it("should calculate clean bond price", function() {
+describe("Bullet bond", function() {
+    describe("When calculating clean price of valid bond", function() {
         var p = core.cleanPrice({
             nominal: 1000,
             term: 10,
@@ -7,6 +7,8 @@ describe("Valid data is passed", function() {
             marketRate: 0.12,
             couponFrequency: 2
         });
-        expect(p).toBeCloseTo(885.301, 3);
+        it("should return correct result", function() {
+            expect(p).toBeCloseTo(885.301, 3);
+        });
     });
 });
