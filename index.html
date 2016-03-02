@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="src/styles/app.css">
+    
+    <script src="src/core.js"></script>
+    <script src="src/app.js"></script>
+    
 </head>
 
 <body>
@@ -39,13 +43,13 @@
 
                     <label>Nominal</label>
                     <div class="input-group">
-                        <input type="text" class="form-control">
+                        <input id="nominal" type="text" class="form-control">
                         <span class="input-group-addon">$</span>
                     </div>
 
                     <label>Coupon Rate</label>
                     <div class="input-group">
-                        <input type="text" class="form-control">
+                        <input id="couponrate" type="text" class="form-control">
                         <span class="input-group-addon">%</span>
                     </div>
 
@@ -68,7 +72,7 @@
                     </select>
 
                     <label>Coupon Frequency</label>
-                    <select class="form-control">
+                    <select id="couponfrequency" class="form-control">
                         <option value="1">Annual</option>
                         <option value="2">Semi-Annual</option>
                         <option value="4">Quarterly</option>
@@ -83,7 +87,7 @@
 
                     <label>Term</label>
                     <div class="input-group">
-                        <input type="text" class="form-control">
+                        <input id="term" type="text" class="form-control">
                         <span class="input-group-addon">Years</span>
                     </div>
 
@@ -109,7 +113,7 @@
                 <div class="form-group">
                     <label>Market Rate</label>
                     <div class="input-group">
-                        <input type="text" class="form-control">
+                        <input id="marketrate" type="text" class="form-control">
                         <span class="input-group-addon">%</span>
                     </div>
                 </div>
@@ -117,9 +121,9 @@
                 <div class="form-group">
                     <label>Bond Price</label>
                     <div class="input-group">                                          
-                        <input type="text" class="form-control">                        
+                        <input id="bondprice" type="text" class="form-control">                        
                         <span class="input-group-btn">                         
-                            <button class="btn btn-default" type="button" onclick="cleanPrice()">Calculate</button>
+                            <button class="btn btn-default" type="button" onclick="app.calcCleanPrice()">Calculate</button>
                         </span>
                     </div>
                 </div>
