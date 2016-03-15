@@ -10,3 +10,6 @@ label{
 .h3-heading{
         margin-top: 10px;
 }
+.table-hidden{
+    display: none;
+}

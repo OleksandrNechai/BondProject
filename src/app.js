@@ -20,7 +20,7 @@ var app = (function () {
     }
 
     function calcCashFlow() {
-        var cashflow = core.cashFlow({
+        var cashFlow = core.cashFlow({
             nominal: $('#nominal').val(),
             term: $('#term').val(),
             bondtype: $('#bondtype').val(),
@@ -31,9 +31,8 @@ var app = (function () {
             marketRate: $('#marketrate').val() / 100,
             date: $('#date').val()
         });
-        $('#cashflow').bootstrapTable('load', //cashflow
-            {date: '1212', coupon: 12, redemption: 10, total: 22}
-        );
+        $('#cashflow').removeClass('table-hidden');
+        $('#cashflow').bootstrapTable('load', cashFlow);
     }
 
     function round(num) {

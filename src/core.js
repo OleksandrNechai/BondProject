@@ -118,7 +118,7 @@ var core = (function() {
             default:
         }
 
-        return cashflow;
+        return cashFlow;
     }
     
 })();
