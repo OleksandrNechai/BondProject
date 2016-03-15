@@ -2,9 +2,11 @@
 <html>
 
 <head>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>        
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
+    <script src="bower_components/bootstrap-table/dist/bootstrap-table.min.js"></script>    
     <link rel="stylesheet" href="src/styles/app.css">
     
     <script src="src/core.js"></script>
@@ -55,7 +57,7 @@
 
                     <label>Maturity Date</label>
                     <div class="input-group">
-                        <input type="date" class="form-control" />                      
+                        <input id="maturitydate" type="date" class="form-control" />
                     </div>
 
                 </div>
@@ -63,9 +65,9 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    
+
                     <label>Bond type</label>
-                    <select class="form-control">
+                    <select id="bondtype" class="form-control">
                         <option value="Bullet">Bullet</option>
                         <option value="Serial">Serial</option>
                         <option value="Annuity">Annuity</option>
@@ -92,12 +94,12 @@
                     </div>
 
                     <label>Day Count Conv.</label>
-                    <select class="form-control">
+                    <select id="daycountconvention" class="form-control">
                         <option value="1">Actual/Actual</option>
                         <option value="2">Actual/365</option>
-                        <option value="4">30/365</option>                      
+                        <option value="4">30/365</option>
                     </select>
-      
+
                 </div>
             </div>
         </div>
@@ -120,10 +122,10 @@
 
                 <div class="form-group">
                     <label>Bond Price</label>
-                    <div class="input-group">                                          
-                        <input id="bondprice" type="text" class="form-control">                        
-                        <span class="input-group-btn">                         
-                            <button class="btn btn-default" type="button" onclick="app.calcCleanPrice()">Calculate</button>
+                    <div class="input-group">
+                        <input id="bondprice" type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="app.calcPrice()">Calculate</button>
                         </span>
                     </div>
                 </div>
@@ -132,11 +134,42 @@
             <div class="col-md-4">
                 <label>Date</label>
                 <div class="input-group">
-                    <input type="date" class="form-control" />
-                </div>                                
-            </div>            
+                    <input id="date" type="date" class="form-control" />
+                </div>
+            </div>
         </div>
-     
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="h3-heading">Cash flow</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>From date</label>
+                    <div class="input-group">
+                        <input id="fromdate" type="date" class="form-control" />                        
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="app.calcCashFlow()">Calculate</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table id="cashflow" class="table-condensed" width="100%">    
+            <thead>
+                <tr>                    
+                    <th data-field="date">Date</th>
+                    <th data-field="coupon">Coupon</th>
+                    <th data-field="redemption">Redemption</th>
+                    <th data-field="total">Total</th>
+                </tr>
+            </thead>
+        </table>
+
 
         <!-- Modal -->
         <div class="modal fade" id="project1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -154,7 +187,7 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </body>
 
 </html>
