@@ -48,27 +48,14 @@ var core = (function() {
     function cashFlow(bond) {
         var cashFlow = [];       
 
-        var numberOfPayments = bond.term;
-        switch(bond.couponFrequency)
-        {
-            case 'Monthly':
-                numberOfPayments *= 12;
-                break;
-            case 'Quarterly':
-                numberOfPayments *= 4;
-                break;
-            case 'Semi-Annual':
-                numberOfPayments *= 2;
-                break;
-            default:
-        }
-
+        var numberOfPayments = bond.term * bond.couponFrequency;       
+           
         switch (bond.bondType)
         {
-            case 'Bullet':
+            case 'Bullet': 
                 for (var i = 0; i < numberOfPayments; i++) {
-                    var couponAmount = ond.nominal * bond.couponRate;
-                    if (i == numberOfPayments - 1)  {
+                    var couponAmount = Number(bond.nominal * bond.couponRate);
+                    if (i != numberOfPayments - 1)  {
                         cashFlow.push({
                             date: '2016-01-01',
                             coupon: couponAmount,
@@ -80,27 +67,27 @@ var core = (function() {
                             date: '2016-01-01',
                             coupon: couponAmount,
                             redemption: bond.nominal,
-                            total: bond.nominal + couponAmount,
+                            total: couponAmount  + Number(bond.nominal),
                         });
                     }                   
                 }
                 break;
 
-            case 'Serial':
-                var remainingNominal = bond.nominal;
-                var redemptionAmount = bond.nominal / numberOfPayments;
+            case 'Serial':                
+                var remainingNominal = Number(bond.nominal);
+                var redemptionAmount = Number(bond.nominal / numberOfPayments);
                 for (var i = 0; i < numberOfPayments; i++) {
                     cashFlow.push({
                         date: '2016-01-01',
-                        coupon: remainingNominal * bond.couponRate,
+                        coupon: remainingNominal * Number(bond.couponRate),
                         redemption: redemptionAmount,
-                        total: redemptionAmount + (remainingNominal * bond.couponRate),
-                    });
-                    remaingNominal -= redemptionAmount;
+                        total: redemptionAmount + (remainingNominal * Number(bond.couponRate)),
+                    });                    
+                    remainingNominal -= redemptionAmount;
                 }
                 break;
 
-            case 'Annual':
+            case 'Annuity': 
                 var remainingNominal = bond.nominal;
                 var redemptionAmount = (bond.nominal * ((1 + bond.couponRate) - 1)) / (Math.pow(1 + bond.couponRate, numberOfPayments) - 1);
                 for (var i = 0; i < numberOfPayments; i++) {
@@ -109,9 +96,9 @@ var core = (function() {
                         coupon: remainingNominal * bond.couponRate,
                         redemption: redemptionAmount,
                         total: redemptionAmount + (remainingNominal * bond.couponRate),
-                    });
-                    remaingNominal -= redemptionAmount;
-                    redemptionAmount *= 1 + bond.couponRate;
+                    });            
+                    remainingNominal -= redemptionAmount;
+                    redemptionAmount *= 1 + bond.couponRate;                   
                 }
                 break;
 
@@ -120,5 +107,5 @@ var core = (function() {
 
         return cashFlow;
     }
-    
+
 })();

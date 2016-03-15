@@ -8,7 +8,7 @@ var app = (function () {
         var price = core.dirtyPrice({
             nominal: $('#nominal').val(),
             term: $('#term').val(),
-            bondtype: $('#bondtype').val(),
+            bondType: $('#bondtype').val(),
             couponRate: $('#couponrate').val() / 100,
             couponFrequency: $('#couponfrequency').val(),
             daycountconvention: $('#daycountconvention').val(),
@@ -23,7 +23,7 @@ var app = (function () {
         var cashFlow = core.cashFlow({
             nominal: $('#nominal').val(),
             term: $('#term').val(),
-            bondtype: $('#bondtype').val(),
+            bondType: $('#bondtype').val(),
             couponRate: $('#couponrate').val() / 100,
             couponFrequency: $('#couponfrequency').val(),
             daycountconvention: $('#daycountconvention').val(),
