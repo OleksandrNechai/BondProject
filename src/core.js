@@ -15,7 +15,7 @@ var core = (function() {
         var requiredMarketYield = bond.marketRate / bond.couponFrequency;
         var n = Math.pow(1 + requiredMarketYield, couponPaymentsCount);
         var cleanprice = couponValue * ((1 - (1 / n))) / requiredMarketYield + bond.nominal / n;     
-        return cleanprice;
+        return round(cleanprice);
     }
 
     function accruedInterest(bond) {
@@ -48,57 +48,64 @@ var core = (function() {
     function cashFlow(bond) {
         var cashFlow = [];       
 
-        var numberOfPayments = bond.term * bond.couponFrequency;       
+        var numberOfPayments = bond.term * bond.couponFrequency;
+        var couponPeriod = (bond.couponFrequency == 1) ? 12 :
+                           (bond.couponFrequency == 2) ? 6 :
+                           (bond.couponFrequency == 4) ? 3 : 1;
+        var date = moment(bond.maturityDate).subtract(bond.term, 'Y');      
            
         switch (bond.bondType)
         {
             case 'Bullet': 
                 for (var i = 0; i < numberOfPayments; i++) {
-                    var couponAmount = Number(bond.nominal * bond.couponRate);
+                    var couponAmount = round(Number(bond.nominal * bond.couponRate));
                     if (i != numberOfPayments - 1)  {
                         cashFlow.push({
-                            date: '2016-01-01',
+                            date: date.format("YYYY-MM-DD"),
                             coupon: couponAmount,
                             redemption: 0,
                             total: couponAmount,
                         });
                     } else {
                         cashFlow.push({
-                            date: '2016-01-01',
+                            date: date.format("YYYY-MM-DD"),
                             coupon: couponAmount,
                             redemption: bond.nominal,
                             total: couponAmount  + Number(bond.nominal),
                         });
-                    }                   
+                    }
+                    date = date.add(couponPeriod, 'M');              
                 }
                 break;
 
             case 'Serial':                
                 var remainingNominal = Number(bond.nominal);
-                var redemptionAmount = Number(bond.nominal / numberOfPayments);
+                var redemptionAmount = round(Number(bond.nominal / numberOfPayments));
                 for (var i = 0; i < numberOfPayments; i++) {
                     cashFlow.push({
-                        date: '2016-01-01',
-                        coupon: remainingNominal * Number(bond.couponRate),
+                        date: date.format("YYYY-MM-DD"),
+                        coupon: round(remainingNominal * Number(bond.couponRate)),
                         redemption: redemptionAmount,
-                        total: redemptionAmount + (remainingNominal * Number(bond.couponRate)),
+                        total: redemptionAmount + round((remainingNominal * Number(bond.couponRate))),
                     });                    
                     remainingNominal -= redemptionAmount;
+                    date = date.add(couponPeriod, 'M')
                 }
                 break;
 
             case 'Annuity': 
                 var remainingNominal = bond.nominal;
-                var redemptionAmount = (bond.nominal * ((1 + bond.couponRate) - 1)) / (Math.pow(1 + bond.couponRate, numberOfPayments) - 1);
+                var redemptionAmount = round((bond.nominal * ((1 + bond.couponRate) - 1)) / (Math.pow(1 + bond.couponRate, numberOfPayments) - 1));
                 for (var i = 0; i < numberOfPayments; i++) {
                     cashFlow.push({
-                        date: '2016-01-01',
-                        coupon: remainingNominal * bond.couponRate,
+                        date: date.format("YYYY-MM-DD"),
+                        coupon: round(remainingNominal * bond.couponRate),
                         redemption: redemptionAmount,
-                        total: redemptionAmount + (remainingNominal * bond.couponRate),
+                        total: redemptionAmount + round((remainingNominal * bond.couponRate)),
                     });            
                     remainingNominal -= redemptionAmount;
-                    redemptionAmount *= 1 + bond.couponRate;                   
+                    redemptionAmount = round(redemptionAmount * (1 + bond.couponRate));
+                    date = date.add(couponPeriod, 'M')
                 }
                 break;
 
@@ -106,6 +113,10 @@ var core = (function() {
         }
 
         return cashFlow;
+    }
+
+    function round(num) {
+        return Math.round(num * 100) / 100;
     }
 
 })();

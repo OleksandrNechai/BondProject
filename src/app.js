@@ -12,7 +12,7 @@ var app = (function () {
             couponRate: $('#couponrate').val() / 100,
             couponFrequency: $('#couponfrequency').val(),
             daycountconvention: $('#daycountconvention').val(),
-            maturitydate: $('#maturitydate').val(),
+            maturityDate: $('#maturitydate').val(),
             marketRate: $('#marketrate').val() / 100,
             date: $('#date').val()
         });
@@ -27,7 +27,7 @@ var app = (function () {
             couponRate: $('#couponrate').val() / 100,
             couponFrequency: $('#couponfrequency').val(),
             daycountconvention: $('#daycountconvention').val(),
-            maturitydate: $('#maturitydate').val(),
+            maturityDate: $('#maturitydate').val(),
             marketRate: $('#marketrate').val() / 100,
             date: $('#date').val()
         });
