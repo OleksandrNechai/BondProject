@@ -17,8 +17,13 @@ var core = (function() {
         }
 
         if(( i > 0) && (i < cashflow.length))
-        {     
-            for(var j = i; j < cashflow.length; j++)
+        {      
+           var daysInPeriod = moment(cashflow[i].date).diff(moment(cashflow[i - 1].date), 'days');
+           var daysAccrued = moment(cashflow[i].date).diff(moment(bond.date), 'days');
+                  
+            price += cashflow[i].total * (1 / Math.pow(1 + (bond.marketRate / bond.couponFrequency), bond.couponFrequency * (daysAccrued/daysInPeriod)));
+
+            for(var j = i + 1; j < cashflow.length; j++)
             {
                 price += cashflow[j].total * (1/Math.pow(1 + (bond.marketRate/bond.couponFrequency), bond.couponFrequency * (1 + j - i)));
             }
