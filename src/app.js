@@ -16,7 +16,7 @@ var app = (function () {
             marketRate: $('#marketrate').val() / 100,
             date: $('#date').val()
         });
-        $('#bondprice').val(round(price));
+        $('#bondprice').val(price);
     }
 
     function calcCashFlow() {
@@ -35,7 +35,4 @@ var app = (function () {
         $('#cashflow').bootstrapTable('load', cashFlow);
     }
 
-    function round(num) {
-        return Math.round(num * 100) / 100;
-    }
 })()
