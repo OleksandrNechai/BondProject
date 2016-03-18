@@ -31,7 +31,7 @@ var app = (function () {
             marketRate: $('#marketrate').val() / 100,
             date: $('#date').val()
         });
-        $('#cashflow').removeClass('table-hidden');
+        $('#cashflow-container').removeClass('table-hidden');
         $('#cashflow').bootstrapTable('load', cashFlow);
     }
 

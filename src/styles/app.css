@@ -13,3 +13,9 @@ label{
 .table-hidden{
     display: none;
 }
+
+.table-container{
+    height: 300px;
+    width: 100%;
+    overflow: scroll;
+}
