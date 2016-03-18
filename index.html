@@ -2,17 +2,17 @@
 <html>
 
 <head>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>        
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="bower_components/bootstrap-table/dist/bootstrap-table.min.css">
-    <script src="bower_components/bootstrap-table/dist/bootstrap-table.min.js"></script>    
-    <script src="node_modules/moment/min/moment.min.js"></script>   
+    <script src="bower_components/bootstrap-table/dist/bootstrap-table.min.js"></script>
+    <script src="node_modules/moment/min/moment.min.js"></script>
     <link rel="stylesheet" href="src/styles/app.css">
-    
+
     <script src="src/core.js"></script>
     <script src="src/app.js"></script>
-    
+
 </head>
 
 <body>
@@ -151,7 +151,7 @@
                 <div class="form-group">
                     <label>From date</label>
                     <div class="input-group">
-                        <input id="fromdate" type="date" class="form-control" />                        
+                        <input id="fromdate" type="date" class="form-control" />
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" onclick="app.calcCashFlow()">Calculate</button>
                         </span>
@@ -160,17 +160,18 @@
             </div>
         </div>
 
-        <table id="cashflow" data-toggle="table" class="table-condensed table-hidden" width="100%">    
-            <thead>
-                <tr>                    
-                    <th data-field="date">Date</th>
-                    <th data-field="coupon">Coupon</th>
-                    <th data-field="redemption">Redemption</th>
-                    <th data-field="total">Total</th>
-                </tr>
-            </thead>
-        </table>
-
+        <div id="cashflow-container" class="table-container table-hidden">
+            <table id="cashflow" data-toggle="table" class="table-condensed table-fixedheader table-striped">
+                <thead>
+                    <tr>
+                        <th data-field="date">Date</th>
+                        <th data-field="coupon">Coupon</th>
+                        <th data-field="redemption">Redemption</th>
+                        <th data-field="total">Total</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="project1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -180,7 +181,8 @@
                         <h4 class="modal-title" id="myModalLabel">Favorite App Page</h4>
                     </div>
                     <div class="modal-body">
-                        <img class="img-responsive" src="http://lorempixel.com/555/300"> This was my first project in this class. I learned a lot about HTML and CSS.
+                        <img class="img-responsive" src="http://lorempixel.com/555/300"> This was my first project in this
+                        class. I learned a lot about HTML and CSS.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
