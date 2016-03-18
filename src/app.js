@@ -16,7 +16,7 @@ var app = (function () {
             marketRate: $('#marketrate').val() / 100,
             date: $('#date').val()
         });
-        $('#bondprice').val(round(price));
+        $('#bondprice').val(round(price, 2));
     }
 
     function calcCashFlow() {
@@ -31,13 +31,16 @@ var app = (function () {
             marketRate: $('#marketrate').val() / 100,
             date: $('#date').val()
         });
-        _.each(cashflow, function (element, index, list) { list[index].total = round(list[index].total); });
-        $('#cashflow').removeClass('table-hidden');
+        _.each(cashFlow, function (item) { item.total = round(item.total, 2); });
+        _.each(cashFlow, function (item) { item.redemption = round(item.redemption, 4); });
+        _.each(cashFlow, function (item) { item.coupon = round(item.coupon, 4); });
+        $('#cashflow-container').removeClass('table-hidden');
         $('#cashflow').bootstrapTable('load', cashFlow);
     }
 
-    function round(num) {
-        return Math.round(num * 100) / 100;
+    function round(number, decimals) {
+        var multiplier = Math.pow(10, decimals);
+        return Math.round(number * multiplier) / multiplier;
     }
 
 })()

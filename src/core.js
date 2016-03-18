@@ -70,8 +70,8 @@ var core = (function() {
 
             case 'Serial':                
                 var remainingNominal = Number(bond.nominal);
-                var redemptionAmount = round(Number(bond.nominal / numberOfPayments));
-                var couponAmount = round(remainingNominal * Number(bond.couponRate));
+                var redemptionAmount = Number(bond.nominal / numberOfPayments);
+                var couponAmount = remainingNominal * Number(bond.couponRate);
 
                 for (var i = 0; i < numberOfPayments; i++) {
 
