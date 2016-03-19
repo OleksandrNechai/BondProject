@@ -4,7 +4,7 @@ var app = (function () {
         calcCashFlow: calcCashFlow
     };
 
-    function calcDirtyPrice() {
+    function calcDirtyPrice() {      
         var price = core.dirtyPrice({
             nominal: $('#nominal').val(),
             term: $('#term').val(),
@@ -31,9 +31,9 @@ var app = (function () {
             marketRate: $('#marketrate').val() / 100,
             date: $('#date').val()
         });
-        _.each(cashFlow, function (item) { item.total = round(item.total, 2); });
-        _.each(cashFlow, function (item) { item.redemption = round(item.redemption, 4); });
-        _.each(cashFlow, function (item) { item.coupon = round(item.coupon, 4); });
+        _.each(cashFlow, function (item) {  item.total = round(item.total, 2); 
+                                            item.redemption = round(item.redemption, 4); 
+                                            item.coupon = round(item.coupon, 4); });
         $('#cashflow-container').removeClass('table-hidden');
         $('#cashflow').bootstrapTable('load', cashFlow);
     }
