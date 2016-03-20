@@ -9,9 +9,15 @@ var core = (function() {
         var price = 0;
         var cashflow = cashFlow(bond);
         var dayCount_30_360 = function (fromDate, toDate) {
-            var daysBetween = 30 * Math.floor(moment(fromDate).diff(moment(toDate.date), 'months'));
-            daysBetween += Math.min(30, 30 - moment(fromDate.date).date());
-            daysBetween += Math.min(30, moment(toDate.date).date());
+
+            var diffInMonthes = moment(toDate).diff(moment(fromDate), 'months', true);
+            var daysBetween = 30 * Math.floor(diffInMonthes);
+            if (diffInMonthes != Math.floor(diffInMonthes))
+            {
+                daysBetween += 30 - Math.min(30, moment(fromDate).date());            
+                daysBetween += Math.min(30, moment(toDate).date());        
+            }
+          
             return daysBetween;
         }
 
@@ -24,12 +30,12 @@ var core = (function() {
 
         if(( i > 0) && (i < cashflow.length))
         {      
-            var daysInPeriod =  (bond.dayCountConvention == 3) ? dayCount_30_360(cashflow[i].date, cashflow[i - 1].date) :
+            var daysInPeriod = (bond.dayCountConvention == 3) ? dayCount_30_360(cashflow[i - 1].date, cashflow[i].date) :
                                 moment(cashflow[i].date).diff(moment(cashflow[i - 1].date), 'days');
-            var daysAccrued =   (bond.dayCountConvention == 3) ? dayCount_30_360(cashflow[i].date, bond.date) :
+                daysInPeriod = (bond.dayCountConvention == 2) ? Math.min(365, daysInPeriod) : daysInPeriod;
+            var daysAccrued = (bond.dayCountConvention == 3) ? dayCount_30_360(bond.date, cashflow[i].date) :
                                 moment(cashflow[i].date).diff(moment(bond.date), 'days');
-           daysInPeriod     =   (bond.dayCountConvention == 2) ? Math.min(365, daysInPeriod) : daysInPeriod;
-                                    
+                                                     
             price += cashflow[i].total * (1 / Math.pow(1 + (bond.marketRate / bond.couponFrequency), daysAccrued/daysInPeriod));
             for(var j = i + 1; j < cashflow.length; j++)
             {
@@ -92,7 +98,7 @@ var core = (function() {
                         total: redemptionAmount + couponAmount,
                     });                    
                     remainingNominal -= redemptionAmount;
-                    couponAmount = remainingNominal * bond.couponRate;
+                    couponAmount = remainingNominal * couponRate;
                     date = adjustEndOfMonth(date.add(couponPeriod, 'M'));
                 }
                 break;
