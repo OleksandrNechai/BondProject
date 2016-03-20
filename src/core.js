@@ -2,7 +2,7 @@ var core = (function() {
 
     return {
         dirtyPrice: dirtyPrice,
-        cashFlow: cashFlow
+        cashFlowFromDate: cashFlowFromDate
     };
 
     function dirtyPrice(bond) {   
@@ -44,6 +44,20 @@ var core = (function() {
         }
 
         return price;
+    }
+
+    function cashFlowFromDate(bond) {
+
+        var cashflowFromDate = [];
+        var cashflow = cashFlow(bond);
+
+        for (var i = 0; i < cashflow.length; i++) {
+            if (cashflow[i].date < bond.fromDate)
+            { continue; }
+            cashflowFromDate.push(cashflow[i]);
+        }
+     
+        return cashflowFromDate;
     }
 
     function cashFlow(bond) {

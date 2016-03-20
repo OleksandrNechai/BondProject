@@ -14,13 +14,14 @@ var app = (function () {
             dayCountConvention: $('#daycountconvention').val(),
             maturityDate: $('#maturitydate').val(),
             marketRate: $('#marketrate').val() / 100,
-            date: $('#date').val()
+            date: $('#date').val(),
+            fromDate: $('#fromdate').val()
         });
         $('#bondprice').val(round(price, 2));
     }
 
     function calcCashFlow() {
-        var cashFlow = core.cashFlow({
+        var cashFlow = core.cashFlowFromDate({
             nominal: $('#nominal').val(),
             term: $('#term').val(),
             bondType: $('#bondtype').val(),
@@ -29,7 +30,8 @@ var app = (function () {
             dayCountConvention: $('#daycountconvention').val(),
             maturityDate: $('#maturitydate').val(),
             marketRate: $('#marketrate').val() / 100,
-            date: $('#date').val()
+            date: $('#date').val(),
+            fromDate: $('#fromdate').val()
         });
         _.each(cashFlow, function (item) {  item.total = round(item.total, 2); 
                                             item.redemption = round(item.redemption, 4); 
